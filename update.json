@@ -1,16 +1,18 @@
 {
-  "versionCode": 1,
-  "versionName": "1.0.0",
+  "versionCode": 2,
+  "versionName": "1.1.0",
   "minSdk": 21,
-  "size": 129310570,
-  "sha256": "C029DA16E4B0730BAD9DE5260AE73736F7A96A505724C7000D58B0B22D49C694",
-  "apkUrl": "https://github.com/Sannallm/ZrinFile/releases/download/v1.0.0/ZrinFile-1.0.0-universal.apk",
+  "size": 129350309,
+  "sha256": "C3FF00CD96E872397E95E43854A8733BC78151431CFE47F9DCC595BDEDA9E459",
+  "apkUrl": "https://github.com/Sannallm/ZrinFile/releases/download/v1.1.0/ZrinFile-1.1.0-universal.apk",
   "notes": [
-    "首个公开版本",
-    "内置官方 Termux 运行时：bootstrap + proot + 原生 PTY，无需 Root",
-    "Termux 支持 apt、bash、ssh 等完整命令，可在设置中切换系统 Shell",
-    "文件管理、预览、回收站、搜索、存储分析、压缩解压",
-    "应用内更新：静默检查、多线程下载、镜像回退、SHA256 校验、自动安装",
-    "Android 5.0 及以上通用安装包，Termux 运行时需要 Android 7.0 及以上"
+    "应用名改为 ZrinFile",
+    "HTML 文件支持预览与源码编辑，预览使用系统 WebView",
+    "新增 PDF 内置预览，图片、文本、代码等格式查看范围扩大",
+    "音频封面多重提取，自动显示歌词并按时间滚动",
+    "新增文件服务器：HTTP 文件共享、网页服务器、FTP，前台常驻",
+    "新增内存清理：一键清理、应用与 APK 检测、大文件扫描",
+    "存储分析改为迭代扫描并显示进度，速度更快",
+    "稳定性改进，减少异常退出"
   ]
 }

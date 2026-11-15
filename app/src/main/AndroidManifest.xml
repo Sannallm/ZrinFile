@@ -15,6 +15,8 @@
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
 
     <queries>
         <intent>
@@ -114,6 +116,35 @@
         <activity
             android:name=".ui.UpdateActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".ui.HtmlViewerActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.HtmlEditorActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.PdfViewerActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.ServerActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.MemoryCleanerActivity"
+            android:exported="false" />
+
+        <service
+            android:name=".server.ServerService"
+            android:exported="false"
+            android:stopWithTask="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

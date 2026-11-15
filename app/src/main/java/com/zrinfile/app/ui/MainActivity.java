@@ -336,7 +336,11 @@ public class MainActivity extends AppCompatActivity implements FileListAdapter.L
         addNav(navBottom, R.drawable.ic_terminal, "命令行", null);
         addNav(navBottom, R.drawable.ic_delete, "回收站", null);
         addNav(navBottom, R.drawable.ic_analyze, "存储分析", null);
+        addNav(navBottom, R.drawable.ic_server, "文件服务器", null);
+        addNav(navBottom, R.drawable.ic_clean, "内存清理", null);
         addNav(navBottom, R.drawable.ic_settings, "设置", null);
+        addNav(navBottom, R.drawable.ic_analyze,
+                Prefs.theme(this) == Prefs.THEME_LIGHT ? "切换为深色" : "切换为浅色", null);
 
         findViewById(R.id.drawer_license).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -402,7 +406,14 @@ public class MainActivity extends AppCompatActivity implements FileListAdapter.L
         if ("命令行".equals(label)) openTerminalHere();
         else if ("回收站".equals(label)) startActivity(new Intent(this, TrashActivity.class));
         else if ("存储分析".equals(label)) startActivity(new Intent(this, StorageAnalyzerActivity.class));
+        else if ("文件服务器".equals(label)) startActivity(new Intent(this, ServerActivity.class));
+        else if ("内存清理".equals(label)) startActivity(new Intent(this, MemoryCleanerActivity.class));
         else if ("设置".equals(label)) startActivity(new Intent(this, SettingsActivity.class));
+        else if (label.startsWith("切换为")) {
+            Prefs.setTheme(this, Prefs.theme(this) == Prefs.THEME_LIGHT ? Prefs.THEME_DARK : Prefs.THEME_LIGHT);
+            App.get().applyTheme();
+            recreate();
+        }
     }
 
     private void rebuildBookmarks() {
@@ -750,41 +761,7 @@ public class MainActivity extends AppCompatActivity implements FileListAdapter.L
             }
             return;
         }
-        Intent i;
-        switch (item.type()) {
-            case FileItem.TYPE_IMAGE:
-                i = new Intent(this, ImageViewerActivity.class);
-                i.putExtra("path", f.getAbsolutePath());
-                startActivity(i);
-                break;
-            case FileItem.TYPE_VIDEO:
-            case FileItem.TYPE_AUDIO:
-                i = new Intent(this, MediaPlayerActivity.class);
-                i.putExtra("path", f.getAbsolutePath());
-                startActivity(i);
-                break;
-            case FileItem.TYPE_ARCHIVE:
-                i = new Intent(this, ZipViewerActivity.class);
-                i.putExtra("path", f.getAbsolutePath());
-                startActivity(i);
-                break;
-            case FileItem.TYPE_APK:
-                i = new Intent(this, ApkInfoActivity.class);
-                i.putExtra("path", f.getAbsolutePath());
-                startActivity(i);
-                break;
-            case FileItem.TYPE_TEXT:
-                i = new Intent(this, TextViewerActivity.class);
-                i.putExtra("path", f.getAbsolutePath());
-                startActivity(i);
-                break;
-            case FileItem.TYPE_PDF:
-                UiUtils.openExternally(this, f, "application/pdf");
-                break;
-            default:
-                showOpenWith(item);
-                break;
-        }
+        OpenHelper.open(this, f);
     }
 
     private void copyRootAndOpen(final FileItem item) {

@@ -30,9 +30,21 @@
             android:id="@+id/audio_panel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:orientation="vertical"
+            android:paddingStart="28dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="28dp"
+            android:paddingBottom="8dp"
             android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/audio_cover"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:background="#1D1F23"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/audio_icon"
@@ -48,6 +60,28 @@
                 android:layout_marginTop="14dp"
                 android:textColor="#AEB3BB"
                 android:textSize="13sp" />
+
+            <ScrollView
+                android:id="@+id/audio_lyrics_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="14dp"
+                android:layout_weight="1"
+                android:fillViewport="true"
+                android:scrollbars="none"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/audio_lyrics"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:lineSpacingExtra="7dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="18dp"
+                    android:textColor="#8B9098"
+                    android:textSize="13sp" />
+            </ScrollView>
         </LinearLayout>
 
         <ProgressBar

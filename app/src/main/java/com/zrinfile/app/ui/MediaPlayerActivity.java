@@ -1,14 +1,20 @@
 package com.zrinfile.app.ui;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -19,9 +25,12 @@ import androidx.appcompat.widget.Toolbar;
 import com.zrinfile.app.R;
 import com.zrinfile.app.fs.FileItem;
 import com.zrinfile.app.fs.FileUtils;
+import com.zrinfile.app.media.MediaMeta;
 import com.zrinfile.app.util.UiUtils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MediaPlayerActivity extends AppCompatActivity {
 
@@ -34,6 +43,11 @@ public class MediaPlayerActivity extends AppCompatActivity {
     private ImageButton playButton;
     private TextView posText;
     private TextView durText;
+    private ImageView coverView;
+    private ScrollView lyricsScroll;
+    private TextView lyricsView;
+    private final List<MediaMeta.LyricLine> lyricLines = new ArrayList<>();
+    private int currentLyric = -1;
     private File file;
     private boolean audio;
     private boolean prepared;
@@ -48,6 +62,9 @@ public class MediaPlayerActivity extends AppCompatActivity {
         video = findViewById(R.id.video_view);
         audioPanel = findViewById(R.id.audio_panel);
         audioLabel = findViewById(R.id.audio_label);
+        coverView = findViewById(R.id.audio_cover);
+        lyricsScroll = findViewById(R.id.audio_lyrics_scroll);
+        lyricsView = findViewById(R.id.audio_lyrics);
         progress = findViewById(R.id.media_progress);
         seek = findViewById(R.id.media_seek);
         playButton = findViewById(R.id.media_play);
@@ -75,6 +92,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
         audioLabel.setText(file.getName());
         if (audio) {
             audioPanel.setVisibility(View.VISIBLE);
+            loadExtras();
         }
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +151,70 @@ public class MediaPlayerActivity extends AppCompatActivity {
         video.setVideoPath(file.getAbsolutePath());
     }
 
+    private void loadExtras() {
+        final File audioFile = file;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final Bitmap cover = MediaMeta.loadCover(audioFile);
+                final List<MediaMeta.LyricLine> lines = MediaMeta.loadLyrics(audioFile);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (isFinishing()) {
+                            if (cover != null) cover.recycle();
+                            return;
+                        }
+                        if (cover != null) {
+                            coverView.setImageBitmap(cover);
+                            coverView.setVisibility(View.VISIBLE);
+                            findViewById(R.id.audio_icon).setVisibility(View.GONE);
+                        }
+                        if (!lines.isEmpty()) {
+                            lyricLines.clear();
+                            lyricLines.addAll(lines);
+                            lyricsScroll.setVisibility(View.VISIBLE);
+                            applyLyricIndex(0);
+                        }
+                    }
+                });
+            }
+        }, "zrinfile-media-meta").start();
+    }
+
+    private void updateLyrics(int position) {
+        if (lyricLines.isEmpty()) return;
+        int index = -1;
+        for (int i = 0; i < lyricLines.size(); i++) {
+            if (lyricLines.get(i).time <= position) index = i;
+            else break;
+        }
+        if (index >= 0 && index != currentLyric) applyLyricIndex(index);
+    }
+
+    private void applyLyricIndex(int index) {
+        if (index < 0 || index >= lyricLines.size()) return;
+        currentLyric = index;
+        SpannableStringBuilder sb = new SpannableStringBuilder();
+        for (int i = 0; i < lyricLines.size(); i++) {
+            int start = sb.length();
+            sb.append(lyricLines.get(i).text);
+            int end = sb.length();
+            sb.setSpan(new ForegroundColorSpan(i == index ? 0xFF8FB4E8 : 0xFF7E838B),
+                    start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            sb.append("\n");
+        }
+        lyricsView.setText(sb);
+        final int target = index;
+        lyricsView.post(new Runnable() {
+            @Override
+            public void run() {
+                int offset = lyricsView.getLineHeight() * target - lyricsScroll.getHeight() / 3;
+                lyricsScroll.scrollTo(0, Math.max(0, offset));
+            }
+        });
+    }
+
     private void tick() {
         if (!prepared) return;
         if (!userSeeking) {
@@ -140,6 +222,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
                 int position = video.getCurrentPosition();
                 seek.setProgress(position);
                 posText.setText(FileUtils.formatTimeShort(position));
+                updateLyrics(position);
             } catch (Exception ignored) {
             }
         }

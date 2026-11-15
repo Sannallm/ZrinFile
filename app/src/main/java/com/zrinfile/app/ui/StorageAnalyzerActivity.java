@@ -61,29 +61,36 @@ public class StorageAnalyzerActivity extends AppCompatActivity {
         scan();
     }
 
+    private long lastProgressPost;
+
     private void scan() {
         summary.setText("正在分析…");
+        final File scanRoot = root;
         App.io().execute(new Runnable() {
             @Override
             public void run() {
                 File[] files = null;
                 try {
-                    files = root.listFiles();
+                    files = scanRoot.listFiles();
                 } catch (Exception ignored) {
                 }
                 final List<FileItem> result = new ArrayList<>();
                 long total = 0;
+                long[] counter = new long[]{0};
                 if (files != null) {
                     for (File f : files) {
                         if (cancelled) return;
                         FileItem item = FileItem.fromFile(f);
                         if (item.isDir) {
-                            item.size = FileUtils.sizeOf(f);
+                            item.size = fastSize(f, counter);
+                        } else {
+                            counter[0]++;
                         }
                         total += item.size;
                         result.add(item);
                     }
                 }
+                if (cancelled) return;
                 Collections.sort(result, new Comparator<FileItem>() {
                     @Override
                     public int compare(FileItem a, FileItem b) {
@@ -108,6 +115,50 @@ public class StorageAnalyzerActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    /** 迭代遍历目录，避免递归过深，并在扫描过程中更新进度。 */
+    private long fastSize(File dir, long[] counter) {
+        long total = 0;
+        java.util.ArrayDeque<File> stack = new java.util.ArrayDeque<>();
+        stack.push(dir);
+        while (!stack.isEmpty()) {
+            if (cancelled) return total;
+            File d = stack.pop();
+            File[] children = null;
+            try {
+                children = d.listFiles();
+            } catch (Exception ignored) {
+            }
+            if (children == null) continue;
+            for (File c : children) {
+                if (cancelled) return total;
+                try {
+                    if (c.isDirectory()) {
+                        stack.push(c);
+                    } else {
+                        total += c.length();
+                    }
+                } catch (Exception ignored) {
+                }
+                counter[0]++;
+            }
+            long now = System.currentTimeMillis();
+            if (now - lastProgressPost > 400) {
+                lastProgressPost = now;
+                final long count = counter[0];
+                final long bytes = total;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!cancelled) {
+                            summary.setText("已扫描 " + count + " 个文件 · " + FileUtils.formatSize(bytes));
+                        }
+                    }
+                });
+            }
+        }
+        return total;
     }
 
     private class AnalyzerAdapter extends RecyclerView.Adapter<AnalyzerAdapter.Holder> {

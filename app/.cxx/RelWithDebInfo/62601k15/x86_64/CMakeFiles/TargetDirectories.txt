@@ -1,0 +1,3 @@
+C:/Users/谢珂/Documents/Trae-CN/default/ZrinFile/app/.cxx/RelWithDebInfo/62601k15/x86_64/CMakeFiles/zrinpty.dir
+C:/Users/谢珂/Documents/Trae-CN/default/ZrinFile/app/.cxx/RelWithDebInfo/62601k15/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/谢珂/Documents/Trae-CN/default/ZrinFile/app/.cxx/RelWithDebInfo/62601k15/x86_64/CMakeFiles/rebuild_cache.dir

@@ -206,11 +206,11 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(new Intent(SettingsActivity.this, LicenseActivity.class));
             }
         });
-        actionRow("关于 ZrinFile 文件管理", "v" + BuildConfig.VERSION_NAME + " · 通用 32/64 位", new Runnable() {
+        actionRow("关于 ZrinFile", "v" + BuildConfig.VERSION_NAME + " · 通用 32/64 位", new Runnable() {
             @Override
             public void run() {
                 new AlertDialog.Builder(SettingsActivity.this, R.style.Theme_ZrinFile_Dialog)
-                        .setTitle("ZrinFile 文件管理")
+                        .setTitle("ZrinFile")
                         .setMessage("版本: " + BuildConfig.VERSION_NAME + " (" + BuildConfig.VERSION_CODE + ")\n"
                                 + "最低系统: Android 5.0 (API 21)\n"
                                 + "架构: 通用安装包，兼容 32 位与 64 位设备\n"

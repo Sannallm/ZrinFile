@@ -1,0 +1,19 @@
+                        -HC:\Users\谢珂\Documents\Trae-CN\default\ZrinFile\app\src\main\cpp
+-DCMAKE_SYSTEM_NAME=Android
+-DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+-DCMAKE_SYSTEM_VERSION=21
+-DANDROID_PLATFORM=android-21
+-DANDROID_ABI=armeabi-v7a
+-DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a
+-DANDROID_NDK=D:\AndroidDev\sdk\ndk\28.2.13676358
+-DCMAKE_ANDROID_NDK=D:\AndroidDev\sdk\ndk\28.2.13676358
+-DCMAKE_TOOLCHAIN_FILE=D:\AndroidDev\sdk\ndk\28.2.13676358\build\cmake\android.toolchain.cmake
+-DCMAKE_MAKE_PROGRAM=D:\AndroidDev\sdk\cmake\3.22.1\bin\ninja.exe
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=C:\Users\谢珂\Documents\Trae-CN\default\ZrinFile\app\build\intermediates\cxx\RelWithDebInfo\62601k15\obj\armeabi-v7a
+-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=C:\Users\谢珂\Documents\Trae-CN\default\ZrinFile\app\build\intermediates\cxx\RelWithDebInfo\62601k15\obj\armeabi-v7a
+-DCMAKE_BUILD_TYPE=RelWithDebInfo
+-BC:\Users\谢珂\Documents\Trae-CN\default\ZrinFile\app\.cxx\RelWithDebInfo\62601k15\armeabi-v7a
+-GNinja
+-DANDROID_STL=none
+                        Build command args: []
+                        Version: 2

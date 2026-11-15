@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ZrinFile 文件管理</string>
+    <string name="app_name">ZrinFile</string>
     <string name="drawer_home">主页</string>
     <string name="drawer_storage">内部存储</string>
     <string name="drawer_sd">存储卡</string>
