@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="tab_height">40dp</dimen>
+    <dimen name="bottom_bar_height">52dp</dimen>
+    <dimen name="item_height">62dp</dimen>
+    <dimen name="grid_item_height">104dp</dimen>
+    <dimen name="drawer_width">288dp</dimen>
+    <dimen name="page_padding">16dp</dimen>
+    <dimen name="icon_button">44dp</dimen>
+    <dimen name="corner">2dp</dimen>
+</resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_terminal"
+        android:shortcutId="terminal"
+        android:shortcutLongLabel="@string/drawer_terminal"
+        android:shortcutShortLabel="@string/drawer_terminal">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetClass="com.zrinfile.app.ui.MainActivity"
+            android:targetPackage="com.zrinfile.app">
+            <extra android:name="open" android:value="terminal" />
+        </intent>
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_delete"
+        android:shortcutId="trash"
+        android:shortcutLongLabel="@string/drawer_trash"
+        android:shortcutShortLabel="@string/drawer_trash">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetClass="com.zrinfile.app.ui.MainActivity"
+            android:targetPackage="com.zrinfile.app">
+            <extra android:name="open" android:value="trash" />
+        </intent>
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_search"
+        android:shortcutId="search"
+        android:shortcutLongLabel="@string/action_search"
+        android:shortcutShortLabel="@string/action_search">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetClass="com.zrinfile.app.ui.MainActivity"
+            android:targetPackage="com.zrinfile.app">
+            <extra android:name="open" android:value="search" />
+        </intent>
+    </shortcut>
+</shortcuts>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/window_bg"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@drawable/bg_toolbar"
+        app:titleTextAppearance="@style/TextAppearance.ZrinFile.ToolbarTitle"
+        app:subtitleTextAppearance="@style/TextAppearance.ZrinFile.ToolbarSubtitle" />
+
+    <View style="@style/Widget.ZrinFile.Divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/analyzer_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/analyzing"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
+
+        <ProgressBar
+            android:id="@+id/analyzer_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="10dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/accent" />
+    </LinearLayout>
+
+    <View style="@style/Widget.ZrinFile.Divider" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/analyzer_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp" />
+</LinearLayout>

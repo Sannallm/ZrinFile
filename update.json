@@ -1,0 +1,16 @@
+{
+  "versionCode": 1,
+  "versionName": "1.0.0",
+  "minSdk": 21,
+  "size": 129310570,
+  "sha256": "C029DA16E4B0730BAD9DE5260AE73736F7A96A505724C7000D58B0B22D49C694",
+  "apkUrl": "https://github.com/Sannallm/ZrinFile/releases/download/v1.0.0/ZrinFile-1.0.0-universal.apk",
+  "notes": [
+    "首个公开版本",
+    "内置官方 Termux 运行时：bootstrap + proot + 原生 PTY，无需 Root",
+    "Termux 支持 apt、bash、ssh 等完整命令，可在设置中切换系统 Shell",
+    "文件管理、预览、回收站、搜索、存储分析、压缩解压",
+    "应用内更新：静默检查、多线程下载、镜像回退、SHA256 校验、自动安装",
+    "Android 5.0 及以上通用安装包，Termux 运行时需要 Android 7.0 及以上"
+  ]
+}

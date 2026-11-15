@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/sel_copy"
+        android:icon="@drawable/ic_copy"
+        android:title="@string/action_copy"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/sel_cut"
+        android:icon="@drawable/ic_cut"
+        android:title="@string/action_cut"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/sel_delete"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/action_delete"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/sel_more"
+        android:icon="@drawable/ic_more_vert"
+        android:title="@string/action_more"
+        app:showAsAction="always">
+        <menu>
+            <item android:id="@+id/sel_open_with" android:title="@string/action_open_with" />
+            <item android:id="@+id/sel_rename" android:title="@string/action_rename" />
+            <item android:id="@+id/sel_batch_rename" android:title="批量重命名" />
+            <item android:id="@+id/sel_compress" android:title="@string/action_compress" />
+            <item android:id="@+id/sel_share" android:title="@string/action_share" />
+            <item android:id="@+id/sel_properties" android:title="@string/action_properties" />
+            <item android:id="@+id/sel_bookmark" android:title="@string/action_add_bookmark" />
+            <item android:id="@+id/sel_select_all" android:title="@string/action_select_all" />
+        </menu>
+    </item>
+</menu>
